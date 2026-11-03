@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090d19">
+  <meta name="description" content="Play Flying Head, a custom Flappy-style arcade game.">
+  <title>Flying Head — Arcade</title>
+  <script type="module" crossorigin src="/assets/index-g775TzDG.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-B50dQQrM.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Flying Head home"><span class="brand-mark">FH</span><span>FLYING HEAD</span></a>
+      <div class="top-actions">
+        <button id="soundToggle" class="icon-button" type="button" aria-label="Mute audio">♫ Sound on</button>
+        <button id="leaderboardToggle" class="icon-button" type="button">Leaderboard</button>
+      </div>
+    </header>
+
+    <section class="game-layout">
+      <div class="game-column">
+        <div class="scorebar">
+          <div class="score-card"><span>Score</span><strong id="score">0</strong></div>
+          <div class="score-card"><span>Personal best</span><strong id="best">0</strong></div>
+        </div>
+
+        <div class="game-frame">
+          <canvas id="gameCanvas" width="480" height="640" aria-label="Flying Head game area"></canvas>
+
+          <section id="startScreen" class="screen start-screen">
+            <div class="screen-shade"></div>
+            <div class="screen-content">
+             
+             
+             
+              <label class="username-field" for="username">
+                <span>మీ పేరు నమోదు చేసుకోండి </span>
+                <input id="username" type="text" maxlength="18" placeholder="Enter your username" autocomplete="off" spellcheck="false">
+              </label>
+              <button id="startButton" class="primary-button" type="button">ఇక మొదలెడదామా <span>→</span></button>
+              <p id="startStatus" class="screen-status">Tap, click or press Space to flap.</p>
+            </div>
+          </section>
+
+          <section id="gameOverScreen" class="screen gameover-screen hidden">
+            <div class="screen-shade"></div>
+            <div class="screen-content gameover-content">
+              <p class="eyebrow">THAT'S A WRAP</p>
+              <h2>కొజ్జా నా కొడుకులా ఉన్నాడే వీడు</h2>
+              <div class="result-score"><span>YOUR SCORE</span><strong id="finalScore">0</strong></div>
+              <p id="newBest" class="new-best hidden">✦ NEW PERSONAL BEST ✦</p>
+             
+              <button id="restartButton" class="primary-button" type="button">PLAY AGAIN <span>↻</span></button>
+              <button id="homeButton" class="text-button" type="button">Back to start</button>
+            </div>
+          </section>
+
+          <div class="mobile-hint" id="mobileHint">TAP ANYWHERE TO FLY</div>
+        </div>
+        <p class="help-text">Desktop: <kbd>SPACE</kbd> / <kbd>↑</kbd> &nbsp; Mobile: tap the game</p>
+      </div>
+
+      <aside class="side-panel">
+        <div class="panel-card">
+          <div class="panel-heading"><div><p class="eyebrow">GLOBAL RANKING</p><h2>Leaderboard</h2></div><span class="trophy">🏆</span></div>
+          <ol id="leaderboardList" class="leaderboard-list"><li class="empty-state">Connect Supabase to load scores.</li></ol>
+          <p id="databaseStatus" class="database-status">Database not configured yet.</p>
+        </div>
+        <div class="panel-card personal-card">
+          <p class="eyebrow">YOUR RECORD</p>
+          <div class="personal-number" id="sideBest">0</div>
+          <p>Best score on this device</p>
+        </div>
+      </aside>
+    </section>
+    <footer>Made to fly. Built to beat your best. <span>✦</span></footer>
+  </main>
+
+  <audio id="startAudio" src="/assets/start-CmwvCVtr.mp3" preload="auto"></audio>
+  <audio id="gameplayAudio" src="/assets/gameplay-DgsqPoF9.mp3" preload="auto" loop></audio>
+  <audio id="gameOverAudio" src="/assets/game-over-B58S86KF.mp3" preload="auto" loop></audio>
+
+</body>
+</html>
