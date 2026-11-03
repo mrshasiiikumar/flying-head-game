@@ -33,7 +33,8 @@ let supabase = null;
 let currentPlayerId = null;
 let currentUsername = "";
 let playerSprite = new Image();
-playerSprite.src = "./assets/images/my-head.png";
+
+playerSprite.src = "/assets/images/my-head.png";
 let spriteReady = false;
 playerSprite.onload = () => { spriteReady = true; };
 playerSprite.onerror = () => { console.warn("Could not load flying-head image."); };
@@ -356,21 +357,39 @@ function drawPipes() {
     ctx.fillRect(pipe.x + 12, lowerY + 26, 8, Math.max(0, GROUND_Y - lowerY - 26));
   }
 }
+
 function drawPlayer() {
-  ctx.save();
-  ctx.translate(player.x, player.y);
-  ctx.rotate(player.rotation);
-  if (spriteReady) {
-    const ratio = playerSprite.width / playerSprite.height;
-    const h = 66;
-    const w = h * ratio;
-    ctx.drawImage(playerSprite, -w / 2, -h / 2, w, h);
-  } else {
-    ctx.fillStyle = "#eaa17e";
-    ctx.beginPath(); ctx.arc(0, 0, 22, 0, Math.PI * 2); ctx.fill();
-  }
-  ctx.restore();
+    ctx.save();
+
+    ctx.translate(player.x, player.y);
+    ctx.rotate(player.rotation);
+
+    if (playerSprite.complete && playerSprite.naturalWidth > 0) {
+
+        const ratio = playerSprite.naturalWidth / playerSprite.naturalHeight;
+
+        const h = 66;
+        const w = h * ratio;
+
+        ctx.drawImage(
+            playerSprite,
+            -w / 2,
+            -h / 2,
+            w,
+            h
+        );
+
+    } else {
+        // Temporary fallback while image loads
+        ctx.fillStyle = "#eaa17e";
+        ctx.beginPath();
+        ctx.arc(0, 0, 22, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    ctx.restore();
 }
+
 function drawGround() {
   ctx.fillStyle = "#70bd59"; ctx.fillRect(0, GROUND_Y, WIDTH, HEIGHT - GROUND_Y);
   ctx.fillStyle = "#d9b56d"; ctx.fillRect(0, GROUND_Y + 12, WIDTH, HEIGHT - GROUND_Y - 12);
