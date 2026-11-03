@@ -34,7 +34,20 @@ let currentPlayerId = null;
 let currentUsername = "";
 let playerSprite = new Image();
 
-playerSprite.src = "/assets/images/my-head.png";
+playerSprite.onload = () => {
+    spriteReady = true;
+    console.log("Customized head loaded successfully!");
+};
+
+playerSprite.onerror = () => {
+    spriteReady = false;
+    console.error("Could not load flying-head image.");
+};
+
+playerSprite.src = new URL(
+    "../assets/images/my-head.png",
+    import.meta.url
+).href;
 let spriteReady = false;
 playerSprite.onload = () => { spriteReady = true; };
 playerSprite.onerror = () => { console.warn("Could not load flying-head image."); };
